@@ -1,0 +1,48 @@
+server:
+  port: 8081
+
+# Thymeleaf
+spring:
+  thymeleaf:
+    cache: false
+
+  # kafka
+  kafka:
+    bootstrap-servers: localhost:9092
+    consumer:
+      group-id: test-consumer-group
+      enable-auto-commit: true
+      auto-commit-interval: 3000
+
+  # MySQL
+  datasource:
+    url: jdbc:mysql://localhost:3306/greatecommunity?serverTimezone=UTC&useUnicode=true&characterEncoding=utf-8&zeroDateTimeBehavior=convertToNull&useSSL=false&allowPublicKeyRetrieval=true
+    username: root
+    password: 123456
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+#  #elasticsearch
+#  data:
+#    elasticsearch:
+#      cluster-name: community
+#      cluster-nodes: 127.0.0.1:9300
+
+  #redis
+  redis:
+    port: 6379
+    host: localhost
+    database: 11
+
+
+# Caffeine
+caffeine:
+  posts:
+    max-size: 15
+    expire-seconds: 180
+
+# MyBatis
+mybatis:
+  configuration:
+    map-underscore-to-camel-case: true
+    use-generated-keys: true
+  mapper-locations: classpath:mapper/*.xml

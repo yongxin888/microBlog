@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.microblog.mapper.SearchMapper">
+    <!--分页搜索-->
+    <select id="queryDiscussPost" resultType="com.microblog.entity.DiscussPost">
+        select * from discuss_post where status != 2
+        <if test="keyword != null and keyword != ''">and title like concat("%", #{keyword}, "%")</if>
+        limit #{current}, #{limit}
+    </select>
+
+    <!--根据条件查询的帖子总数-->
+    <select id="queryDiscussPostCount" resultType="int">
+        select count(id) from discuss_post where status != 2
+        <if test="keyword != null and keyword != ''">and title like concat("%", #{keyword}, "%")</if>
+    </select>
+</mapper>
